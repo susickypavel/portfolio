@@ -1,0 +1,8 @@
+@import "homepage.scss";
+@import "imports.scss";
+@import "animations.scss";
+
+html, body, #REACT_MOUNT, .homePage {
+    height: 100%;
+    margin: 0;
+}

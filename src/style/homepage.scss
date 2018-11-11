@@ -1,0 +1,46 @@
+.homePage {
+    display: flex;
+    align-items: center;
+    flex-flow: column wrap;
+
+    color: #e0e0e0;
+    background-color: #212121;
+    
+    & h1 {
+        font: 36px roboto-black;
+        margin: 0;
+    }
+}
+
+.profilePhoto {
+    padding: 16px;
+    max-width: 250px;
+    max-height: 250px;
+    width: 100%;
+    height: 100%;
+    border: 6px solid #e0e0e0;
+    border-radius: 100%;
+    opacity: 0.8;
+
+    margin: 8px;
+
+    background-image: url("../assets/images/profile.png");
+    background-size: cover;
+    background-position: center center;
+    overflow: hidden;
+
+    &:hover {
+        opacity: 1;
+        cursor: pointer;
+    }
+
+    transition: opacity 0.5s;
+    animation: flowInFromLeft 1s;
+}
+
+@media only screen and (max-width: 300px) {
+    .profilePhoto {
+        max-width: 150px;
+        max-height: 150px;
+    }
+}
