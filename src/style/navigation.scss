@@ -1,0 +1,43 @@
+.navigation {
+    text-align: right;
+    position: fixed;
+    width: 100%;
+    height: $navigation-height;
+
+    & ul {
+        list-style-type: none;
+        padding: 0;
+        margin-right: 32px;
+
+        & li {
+            display: inline-block;
+
+            & a {
+                display: block;
+                background-color: #e0e0e01c;
+                padding: 16px;
+                margin: 0 4px;
+                width: fit-content;
+                text-align: center;
+                text-decoration: none;
+                color: black;
+                font: 16px roboto-black;
+
+                transform: skew(-35deg);
+                transition: background-color .2s linear;
+                &:hover {
+                    background-color: #03a9f4;
+                }
+
+                & span {
+                    display: block;
+                    transform: skew(35deg);
+                }
+            }
+        }
+    }
+}
+
+.activeLink {
+    background-color: #007ac1 !important;
+}
