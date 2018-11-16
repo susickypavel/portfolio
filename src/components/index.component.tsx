@@ -3,19 +3,23 @@ import { Switch, Route } from "react-router";
 
 import HomePage from "./homepage.component";
 import Navigation from "./navigation.component";
+import LoadingScreen from "./loading.component";
 
-export default class extends React.Component {
+class Index extends React.Component {
     render() {
         return (
             <React.Fragment>
-                <Navigation />
+                {/* <Navigation /> */}
                 <Switch>
-                    <Route path="/about" component={() => <div>about</div>} />
+                    {/* <Route path="/about" component={() => <div>about</div>} />
                     <Route path="/contact" component={() => <div>contact</div>} />
-                    <Route path="/projects" component={() => <div>work</div>} />
-                    <Route path="/" component={HomePage} />
+                    <Route path="/projects" component={() => <div>work</div>} /> */}
+                    <Route path="/home" component={HomePage} />
+                    <Route path="/" component={LoadingScreen} />
                 </Switch>
             </React.Fragment>
         );
     }
 }
+
+export default Index;
