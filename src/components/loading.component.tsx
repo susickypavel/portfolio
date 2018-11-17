@@ -44,9 +44,9 @@ class LoadingScreen extends React.Component<IProps, IState> {
     private lines: JSX.Element[] = [
         <div key="ab0">[ <ColorizedStatus>OK</ColorizedStatus> ] Command executed with keycode A8J45</div>,
         <div key="ab1">[ <ColorizedStatus>OK</ColorizedStatus> ] 01010000x01010011 instruction has been executed.</div>,
-        <div key="ab1">[ <ColorizedStatus>OK</ColorizedStatus> ] UI9SA - generated text to make it look more professional</div>,
-        <div key="ab2">[ <ColorizedStatus warning={true}>WARNING</ColorizedStatus> ] Have you expected some kind of system warning? </div>,
-        <div key="ab3">[ <ColorizedStatus>OK</ColorizedStatus> ] Preparing cool stuff for our visitors</div>
+        <div key="ab2">[ <ColorizedStatus>OK</ColorizedStatus> ] UI9SA - generated text to make it look more professional</div>,
+        <div key="ab3">[ <ColorizedStatus warning={true}>WARNING</ColorizedStatus> ] Have you expected some kind of system warning? </div>,
+        <div key="ab4">[ <ColorizedStatus>OK</ColorizedStatus> ] Preparing cool stuff for our visitors</div>
     ];
 
     constructor(props: any) {
@@ -87,9 +87,9 @@ class LoadingScreen extends React.Component<IProps, IState> {
         } else {
             this.setState({
                 renderedLines: [...renderedLines,
-                (<div key="ab4">[ <ColorizedStatus>OK</ColorizedStatus> ] Initialization completed <br /> Redirecting...</div>)]
+                (<div key="ab5">[ <ColorizedStatus>OK</ColorizedStatus> ] Initialization completed <br /> Redirecting...</div>)]
             }, () => {
-                this.timeoutId = setTimeout(() => this.props.history.push("/home"), 1000);
+                this.timeoutId = setTimeout(() => this.props.history.push("/home"), 2000);
             });
         }
     }

@@ -1,7 +1,32 @@
 import * as React from "react";
-import { Link } from "react-router-dom";
+import styled from "styled-components";
 
-import SlideShow from "./slideshow.component";
+// #625D73
+// #7695B2
+
+const HomePageHolder = styled.div`
+    height: 100%;
+`;
+
+const Header = styled.div`
+    border: 12px solid white;
+`;
+
+const HeadLine = styled.h1`
+    font: 128px roboto-black;
+    background-color: #7695B2;
+    color: white;
+    border: 1px solid gray;
+    margin: 0px;
+    padding: 16px;
+    width: fit-content;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    text-shadow: 1px 1px 8px black;
+`;
+
+const Description = styled.p`
+    font: 36px roboto-medium;
+`;
 
 class HomePage extends React.PureComponent {
 
@@ -25,18 +50,18 @@ class HomePage extends React.PureComponent {
 
     render() {
         return(
-            <div className="homePage">
-                <Link to="/" className="profilePhoto"/>
-                <h1>Pavel Sušický <img src={require("../assets/images/czechflag.svg")} alt="czech_flag" width="45" height="30"/></h1>
+            <HomePageHolder>
+                <Header>
+                    <HeadLine>Pavel Sušický</HeadLine>
+                </Header>
 
-                <p>- Young <strong>WEB</strong> developer </p>
-
-                <SlideShow />
+                        <img src={require("../assets/images/czechflag.svg")} alt="czech_flag" width="45" height="30"/>
+                <Description>- Young <strong>WEB</strong> developer </Description>
 
                 <div className="socialLinks">
                     {this.renderLinks()}
                 </div>
-            </div>
+            </HomePageHolder>
         );
     }
 }
