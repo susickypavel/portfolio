@@ -8,12 +8,16 @@ const HomePageHolder = styled.div`
     height: 100%;
 `;
 
+const Boundary = styled.div`
+    border: 12px solid transparent;
+`;
+
 const Header = styled.div`
-    border: 12px solid white;
+
 `;
 
 const HeadLine = styled.h1`
-    font: 128px roboto-black;
+    font: 120px roboto-black;
     background-color: #7695B2;
     color: white;
     border: 1px solid gray;
@@ -26,6 +30,23 @@ const HeadLine = styled.h1`
 
 const Description = styled.p`
     font: 36px roboto-medium;
+    width: fit-content;
+    border: 1px solid gray;
+    padding: 16px;
+    margin: 0;
+    color: white;
+    background-color: #625D73;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    text-shadow: 1px 1px 8px black;
+`;
+
+const SocialLinks = styled.div`
+    border: 1px solid gray;
+    width: fit-content;
+    padding: 16px;
+    background-color: lightgray;
+    text-shadow: 1px 1px 8px black;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 `;
 
 class HomePage extends React.PureComponent {
@@ -41,7 +62,7 @@ class HomePage extends React.PureComponent {
         return links.map((link) => {
             const { name, hyperlink, imgPath } = link;
             return (
-                <a key={`link-${name}`} href={hyperlink} className="socialMediaLink">
+                <a key={`link-${name}`} href={hyperlink}>
                     <img src={require(`../assets/images/socialmedia/${imgPath}`)} alt={name} width="50" height="50" />
                 </a>
             );
@@ -51,16 +72,22 @@ class HomePage extends React.PureComponent {
     render() {
         return(
             <HomePageHolder>
-                <Header>
-                    <HeadLine>Pavel Sušický</HeadLine>
-                </Header>
+                <Boundary>
+                    <Header>
+                        <HeadLine>Pavel Sušický</HeadLine>
+                    </Header>
+                </Boundary>
+                <Boundary>
+                    <Description>
+                        - Young <strong>WEB</strong> developer from <img src={require("../assets/images/czechflag.svg")} alt="czech_flag" width="45" height="30"/>
+                    </Description>
+                </Boundary>
 
-                        <img src={require("../assets/images/czechflag.svg")} alt="czech_flag" width="45" height="30"/>
-                <Description>- Young <strong>WEB</strong> developer </Description>
-
-                <div className="socialLinks">
-                    {this.renderLinks()}
-                </div>
+                <Boundary>
+                    <SocialLinks>
+                        {this.renderLinks()}
+                    </SocialLinks>
+                </Boundary>
             </HomePageHolder>
         );
     }
