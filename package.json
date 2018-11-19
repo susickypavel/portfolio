@@ -50,6 +50,7 @@
     "axios": "^0.18.0",
     "draft-js": "^0.10.5",
     "draft-js-export-html": "^1.2.0",
+    "konva": "^2.5.1",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-redux": "^5.0.7",
