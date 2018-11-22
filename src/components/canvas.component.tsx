@@ -1,126 +1,135 @@
 import * as React from "react";
 import styled from "styled-components";
-import * as Konva from "konva";
+import { Stage, Layer, Image as KonvaImage } from "react-konva";
 
 const CanvasHolder = styled.div`
     position: fixed;
     z-index: 1;
 `;
 
-class CanvasBackground extends React.Component {
+interface IState {
+    sizes: {
+        height: number;
+        width: number;
+    };
+    images: Array<{
+        src: string;
+        x: number;
+        y: number;
+        sizes: { width: number, height: number };
+        dragging: boolean;
+    }>;
+}
+
+class CanvasBackground extends React.Component<{}, IState> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            sizes: {
+                height: window.innerHeight,
+                width: window.innerWidth
+            },
+            images: [
+                {
+                    sizes: { height: 50, width: 50 },
+                    x: Math.random() * (window.innerWidth - 100),
+                    y: Math.random() * (window.innerHeight - 100),
+                    dragging: false,
+                    src: require("../assets/images/logo_v2.svg")
+                },
+                {
+                    sizes: { height: 50, width: 50 },
+                    x: Math.random() * (window.innerWidth - 100),
+                    y: Math.random() * (window.innerHeight - 100),
+                    dragging: false,
+                    src: require("../assets/images/czechflag.svg")
+                }
+            ],
+        };
+        this.animate = this.animate.bind(this);
+        this.handleResize = this.handleResize.bind(this);
+    }
+
+    componentWillMount() {
+        window.addEventListener("resize", this.handleResize);
+    }
+
+    componentWillUnmount() {
+        window.removeEventListener("resize", this.handleResize);
+    }
+
     componentDidMount() {
-        const width = window.innerWidth;
-        const height = window.innerHeight;
+        this.animate();
+    }
 
-        const stage = new Konva.Stage({
-            container: "container",
-            width,
-            height
+    animate() {
+        this.setState((state) => {
+            for (const iterator of state.images) {
+                if (iterator.y + 50 <= window.innerHeight && !iterator.dragging) {
+                    iterator.y += 1;
+                }
+            }
+            return {
+                images: state.images
+            };
+        }, () => requestAnimationFrame(this.animate));
+    }
+
+    renderImages() {
+        return this.state.images.map((image) => {
+            const { y, x, src, sizes } = image;
+            const tempImage = new Image(sizes.width, sizes.height);
+            tempImage.src = src;
+
+            return (
+                <KonvaImage
+                    x={x}
+                    y={y}
+                    key={src}
+                    draggable={true}
+                    image={tempImage}
+                    onDragStart={() => this.setState((state) => {
+                        state.images[state.images.indexOf(image)].dragging = true;
+                        return {
+                            images: state.images
+                        };
+                    })}
+                    onDragEnd={(e: any) => this.setState((state) => {
+                        state.images[state.images.indexOf(image)] = {
+                            x: e.target.attrs.x,
+                            y: e.target.attrs.y,
+                            dragging: false,
+                            src,
+                            sizes
+                        };
+
+                        return {
+                            images: state.images
+                        };
+                    })}
+                />
+            );
         });
+    }
 
-        const layer = new Konva.Layer();
-        const rectX = stage.getWidth() / 2 - 50;
-        const rectY = stage.getHeight() / 2 - 25;
-
-        const box = new Konva.Rect({
-            x: rectX,
-            y: rectY,
-            width: 100,
-            height: 50,
-            fill: "#00D2FF",
-            stroke: "black",
-            strokeWidth: 4,
-            draggable: true
+    handleResize() {
+        this.setState({
+            sizes: {
+                height: window.innerHeight,
+                width: window.innerWidth
+            }
         });
-
-        box.on("mouseover", function() {
-            document.body.style.cursor = "pointer";
-        });
-        box.on("mouseout", function() {
-            document.body.style.cursor = "default";
-        });
-
-        layer.add(box);
-        stage.add(layer);
     }
 
     render() {
         return (
-            <CanvasHolder id="container" />
+            <CanvasHolder>
+                <Stage width={this.state.sizes.width} height={this.state.sizes.height}>
+                    <Layer>{this.renderImages()}</Layer>
+                </Stage>
+            </CanvasHolder>
         );
     }
 }
-
-// const Canvas = styled.canvas`
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     z-index: -5;
-//     background-color: rgba(0, 0, 0, 0);
-// `;
-
-// class CanvasBackground extends React.PureComponent {
-//     private canvas!: HTMLCanvasElement;
-//     private ctx!: CanvasRenderingContext2D;
-//     private pos = { x: 0, y: 0 };
-
-//     constructor(props: any) {
-//         super(props);
-//         this.draw = this.draw.bind(this);
-//         this.handleResize = this.handleResize.bind(this);
-//         this.setPosition = this.setPosition.bind(this);
-//     }
-
-//     componentWillMount() {
-//         window.addEventListener("resize", this.handleResize);
-//         window.addEventListener("mousemove", this.draw);
-//         window.addEventListener("mousedown", this.setPosition);
-//         window.addEventListener("mouseenter", this.setPosition);
-//     }
-
-//     componentWillUnmount() {
-//         window.removeEventListener("resize", this.handleResize);
-//         window.removeEventListener("mousemove", this.draw);
-//         window.removeEventListener("mousedown", this.setPosition);
-//         window.removeEventListener("mouseenter", this.setPosition);
-//     }
-
-//     componentDidMount() {
-//         this.canvas = document.querySelector("canvas") as HTMLCanvasElement;
-//         this.ctx = this.canvas.getContext("2d") as CanvasRenderingContext2D;
-//         this.canvas.height = window.innerHeight;
-//         this.canvas.width = window.innerWidth;
-//     }
-
-//     handleResize() {
-//         this.canvas.height = window.innerHeight;
-//         this.canvas.width = window.innerWidth;
-//     }
-
-//     setPosition(e: any) {
-//         this.pos.x = e.clientX;
-//         this.pos.y = e.clientY;
-//     }
-
-//     draw(e: any) {
-//         if (e.buttons != 1) {
-//             return;
-//         }
-
-//         this.ctx.beginPath();
-//         this.ctx.lineWidth = 5;
-//         this.ctx.lineCap = "round";
-//         this.ctx.strokeStyle = "black";
-
-//         this.ctx.moveTo(this.pos.x, this.pos.y);
-//         this.setPosition(e);
-//         this.ctx.lineTo(this.pos.x, this.pos.y);
-//         this.ctx.stroke();
-//     }
-
-//     render() {
-//         return <Canvas />;
-//     }
-// }
 
 export default CanvasBackground;
