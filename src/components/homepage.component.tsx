@@ -1,52 +1,58 @@
 import * as React from "react";
 import styled from "styled-components";
-
-// #625D73
-// #7695B2
+import { Link } from "react-router-dom";
 
 const HomePageHolder = styled.div`
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    justify-content: center;
     height: 100%;
 `;
 
 const Boundary = styled.div`
-    border: 12px solid transparent;
+    border: 12px solid white;
+    width: 100%;
 `;
 
 const Header = styled.div`
-
+    color: white;
 `;
 
 const HeadLine = styled.h1`
-    font: 120px roboto-black;
-    background-color: #7695B2;
-    color: white;
-    border: 1px solid gray;
+    text-align: center;
+    font: calc(7vw + 30px) roboto-black;
     margin: 0px;
     padding: 16px;
-    width: fit-content;
+    background-color: #c70039;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     text-shadow: 1px 1px 8px black;
 `;
 
-const Description = styled.p`
-    font: 36px roboto-medium;
-    width: fit-content;
-    border: 1px solid gray;
-    padding: 16px;
-    margin: 0;
-    color: white;
-    background-color: #625D73;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-    text-shadow: 1px 1px 8px black;
+const HighLightedLetter = styled(Link)`
+    font-size: calc(8vw + 30px);
+    color: #ffc305;
+    position: relative;
+    z-index: 5;
+    text-decoration: none;
+    &:hover {
+        color: #ff5733;
+    }
+    transition: color .15s linear;
 `;
 
-const SocialLinks = styled.div`
-    border: 1px solid gray;
-    width: fit-content;
-    padding: 16px;
-    background-color: lightgray;
-    text-shadow: 1px 1px 8px black;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+const SocialMediaHolder = styled.div`
+    text-align: center;
+    & a {
+        position: relative;
+        z-index: 5;
+        margin: 0px 4px;
+        opacity: 0.8;
+        &:hover {
+            opacity: 1;
+        }
+        transition: .1s linear;
+    }
 `;
 
 class HomePage extends React.PureComponent {
@@ -63,7 +69,7 @@ class HomePage extends React.PureComponent {
             const { name, hyperlink, imgPath } = link;
             return (
                 <a key={`link-${name}`} href={hyperlink}>
-                    <img src={require(`../assets/images/socialmedia/${imgPath}`)} alt={name} width="50" height="50" />
+                    <img src={require(`../assets/images/socialmedia/${imgPath}`)} alt={name} width="120" height="120" />
                 </a>
             );
         });
@@ -74,19 +80,18 @@ class HomePage extends React.PureComponent {
             <HomePageHolder>
                 <Boundary>
                     <Header>
-                        <HeadLine>Pavel Sušický</HeadLine>
+                        <HeadLine>
+                            <HighLightedLetter to="/projects">P</HighLightedLetter>
+                            <HighLightedLetter to="/about">A</HighLightedLetter>
+                            VEL <HighLightedLetter to="/contact">S</HighLightedLetter>ušický
+                        </HeadLine>
                     </Header>
-                </Boundary>
-                <Boundary>
-                    <Description>
-                        - Young <strong>WEB</strong> developer from <img src={require("../assets/images/czechflag.svg")} alt="czech_flag" width="45" height="30"/>
-                    </Description>
                 </Boundary>
 
                 <Boundary>
-                    <SocialLinks>
+                    <SocialMediaHolder>
                         {this.renderLinks()}
-                    </SocialLinks>
+                    </SocialMediaHolder>
                 </Boundary>
             </HomePageHolder>
         );

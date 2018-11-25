@@ -6,6 +6,10 @@ $navigation-height: 85px;
 @import "imports.scss";
 @import "animations.scss";
 
+* {
+    box-sizing: border-box;
+}
+
 html, body, #REACT_MOUNT, .homePage {
     height: 100%;
     margin: 0;

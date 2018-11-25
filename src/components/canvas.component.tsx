@@ -2,12 +2,20 @@ import * as React from "react";
 import styled from "styled-components";
 import { Stage, Layer, Image as KonvaImage } from "react-konva";
 
-const CanvasHolder = styled.div`
+interface CustomStyleProps {
+    cursor: string;
+}
+
+const CanvasHolder = styled.div<CustomStyleProps>`
     position: fixed;
     z-index: 1;
+    ${(props) => `
+        cursor: ${props.cursor};
+    `}
 `;
 
 interface IState {
+    cursor: string;
     sizes: {
         height: number;
         width: number;
@@ -25,6 +33,7 @@ class CanvasBackground extends React.Component<{}, IState> {
     constructor(props: any) {
         super(props);
         this.state = {
+            cursor: "auto",
             sizes: {
                 height: window.innerHeight,
                 width: window.innerWidth
@@ -65,8 +74,10 @@ class CanvasBackground extends React.Component<{}, IState> {
     animate() {
         this.setState((state) => {
             for (const iterator of state.images) {
-                if (iterator.y + 50 <= window.innerHeight && !iterator.dragging) {
+                if (iterator.y - iterator.sizes.height <= window.innerHeight && !iterator.dragging) {
                     iterator.y += 1;
+                } else {
+                    iterator.y = -iterator.sizes.height;
                 }
             }
             return {
@@ -88,6 +99,10 @@ class CanvasBackground extends React.Component<{}, IState> {
                     key={src}
                     draggable={true}
                     image={tempImage}
+                    onMouseEnter={() => this.setState({ cursor: "grab" })}
+                    onMouseLeave={() => this.setState({ cursor: "auto" })}
+                    onMouseDown={() => this.setState({ cursor: "grabbing" })}
+                    onMouseUp={() => this.setState({ cursor: "grab" })}
                     onDragStart={() => this.setState((state) => {
                         state.images[state.images.indexOf(image)].dragging = true;
                         return {
@@ -123,7 +138,7 @@ class CanvasBackground extends React.Component<{}, IState> {
 
     render() {
         return (
-            <CanvasHolder>
+            <CanvasHolder cursor={this.state.cursor}>
                 <Stage width={this.state.sizes.width} height={this.state.sizes.height}>
                     <Layer>{this.renderImages()}</Layer>
                 </Stage>

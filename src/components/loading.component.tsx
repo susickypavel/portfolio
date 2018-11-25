@@ -18,6 +18,8 @@ const ConsoleText = styled.div`
 `;
 
 const ConsoleBackground = styled.div`
+    position: relative;
+    z-index: 10;
     background-color: black;
     height: 100%;
 `;
