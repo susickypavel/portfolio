@@ -46,12 +46,20 @@ const SocialMediaHolder = styled.div`
     & a {
         position: relative;
         z-index: 5;
-        margin: 0px 4px;
         opacity: 0.8;
-        &:hover {
-            opacity: 1;
+        & img {
+            margin: 4px;
+            border: 2.5px solid black;
+            border-radius: 16px;
+            padding: 4px;
+            box-shadow: 2px 2px 0px black;
+            position: relative;
+            &:hover {
+                top: 2px;
+                left: 2px;
+                box-shadow: 1px 1px 0px black;
+            }
         }
-        transition: .1s linear;
     }
 `;
 
@@ -83,7 +91,7 @@ class HomePage extends React.PureComponent {
                         <HeadLine>
                             <HighLightedLetter to="/projects">P</HighLightedLetter>
                             <HighLightedLetter to="/about">A</HighLightedLetter>
-                            VEL <HighLightedLetter to="/contact">S</HighLightedLetter>ušický
+                            vel <HighLightedLetter to="/contact">S</HighLightedLetter>ušický
                         </HeadLine>
                     </Header>
                 </Boundary>
