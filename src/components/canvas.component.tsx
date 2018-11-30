@@ -29,7 +29,7 @@ interface IState {
     }>;
 }
 
-class CanvasBackground extends React.Component<{}, IState> {
+export class CanvasBackground extends React.Component<{}, IState> {
     constructor(props: any) {
         super(props);
         this.state = {
@@ -146,5 +146,3 @@ class CanvasBackground extends React.Component<{}, IState> {
         );
     }
 }
-
-export default CanvasBackground;

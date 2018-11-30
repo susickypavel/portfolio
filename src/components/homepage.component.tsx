@@ -63,7 +63,7 @@ const SocialMediaHolder = styled.div`
     }
 `;
 
-class HomePage extends React.PureComponent {
+export class HomePage extends React.PureComponent {
 
     renderLinks() {
         const links = [
@@ -105,5 +105,3 @@ class HomePage extends React.PureComponent {
         );
     }
 }
-
-export default HomePage;

@@ -41,7 +41,7 @@ interface IState {
     renderedLines: JSX.Element[];
 }
 
-class LoadingScreen extends React.Component<IProps, IState> {
+export class LoadingScreen extends React.Component<IProps, IState> {
     private timeoutId: any = null;
     private lines: JSX.Element[] = [
         <div key="ab0">[ <ColorizedStatus>OK</ColorizedStatus> ] Command executed with keycode A8J45</div>,
@@ -116,5 +116,3 @@ class LoadingScreen extends React.Component<IProps, IState> {
         );
     }
 }
-
-export default LoadingScreen;
