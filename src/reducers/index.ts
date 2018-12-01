@@ -4,10 +4,13 @@ import { ProjectReducer } from "./projects.reducer";
 import { IProject } from "../types";
 
 export interface ReduxState {
-    projects: IProject[];
+    project: {
+        projects: IProject[];
+        activeProject: IProject;
+    };
 }
 
 export const rootReducer = combineReducers({
     form: formReducer,
-    projects: ProjectReducer
+    project: ProjectReducer
 });

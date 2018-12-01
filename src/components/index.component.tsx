@@ -6,6 +6,7 @@ import Navigation from "./navigation.component";
 import { LoadingScreen } from "./loading.component";
 import { CanvasBackground } from "./canvas.component";
 import { ProjectPage } from "../containers/projectpage.container";
+import { ProjectShowPage } from "../containers/projectshow.container";
 
 class Index extends React.Component {
     render() {
@@ -16,6 +17,7 @@ class Index extends React.Component {
                 <Switch>
                     {/* <Route path="/about" component={() => <div>about</div>} />
                     <Route path="/contact" component={() => <div>contact</div>} /> */}
+                    <Route path="/project/:name" component={ProjectShowPage}/>
                     <Route path="/projects" component={ProjectPage} />
                     <Route path="/home" component={HomePage} />
                     <Route path="/" component={LoadingScreen} />

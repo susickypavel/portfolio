@@ -1,5 +1,5 @@
 import * as React from "react";
-import styled, {StyledComponent} from "styled-components";
+import styled from "styled-components";
 import {connect} from "react-redux";
 import {ReduxState} from "../reducers";
 import {IProject} from "../types";
@@ -14,11 +14,12 @@ const ProjectNode = styled(Link)<{ badge: string; }>`
     display: block;
     text-decoration: none;
     color: black;
-    background-color: ${(props) => props.badge == "extension" ? "lime" : "cyan" };
+    background-color: ${(props) => pickColor(props.badge) };
     margin: 16px auto;
     padding: 16px;
     width: 90%;
     max-width: 800px;
+    opacity: 0.8;
     & h1, p {
         margin: 0;
     }
@@ -30,11 +31,29 @@ const ProjectNode = styled(Link)<{ badge: string; }>`
         font: 24px roboto-thin;
         font-weight: bold;
     }
+    &:hover {
+        transform: translateY(3px);
+        opacity: 1;
+    }
+    transition: transform .1s ease-in-out;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 `;
 
 interface IProps {
     projects: IProject[];
+}
+
+const pickColor = (badge: string) => {
+    switch (badge) {
+        case "web":
+            return "#E18172";
+        case "extension":
+            return "#9569BC";
+        case "game":
+            return "#5AD9F1";
+        default:
+            return "gray";
+    }
 }
 
 class ProjectPageComponent extends React.Component<IProps> {
@@ -58,9 +77,9 @@ class ProjectPageComponent extends React.Component<IProps> {
         return projects.map((project) => {
             const { name, description, badge } = project;
             return (
-                <ProjectNode to={`/projects/${name}`} key={name} badge={badge}>
+                <ProjectNode to={`/project/${name}`} key={name} badge={badge}>
                     <h1>{name}</h1>
-                    <p>{description}</p>
+                    <p>{badge}</p>
                 </ProjectNode>
             );
         });
@@ -69,7 +88,7 @@ class ProjectPageComponent extends React.Component<IProps> {
 
 const mapStateToProps = (state: ReduxState) => {
     return {
-        projects: state.projects
+        projects: state.project.projects
     };
 }
 
