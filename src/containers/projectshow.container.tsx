@@ -8,6 +8,8 @@ import {IProject} from "../types";
 import styled from "styled-components";
 
 const PostHolder = styled.div`
+    background-color: #F1F4F2;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     width: 100%;
     max-width: 800px;
     margin: 0 auto;

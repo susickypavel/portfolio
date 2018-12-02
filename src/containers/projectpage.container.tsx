@@ -39,9 +39,18 @@ const ProjectNode = styled(Link)<{ badge: string; }>`
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 `;
 
-interface IProps {
-    projects: IProject[];
-}
+const CheckBoxHolder = styled.div`
+    display: inline-block;
+    margin: 0 4px;
+    & label {
+        font: 24px roboto-medium;
+        text-transform: uppercase;
+    }
+    & input {
+        width: 18px;
+        height: 18px;
+    }
+`;
 
 const pickColor = (badge: string) => {
     switch (badge) {
@@ -56,16 +65,22 @@ const pickColor = (badge: string) => {
     }
 }
 
-class ProjectPageComponent extends React.Component<IProps> {
-    render() {
-        return (
-            <div>
-                <Headline>MY WORK 💾</Headline>
-                <div>
-                    {this.renderProjects()}
-                </div>
-            </div>
-        );
+interface IProps {
+    projects: IProject[];
+}
+
+interface IState {
+    visibleBadges: string[];
+}
+
+class ProjectPageComponent extends React.Component<IProps, IState> {
+    private badgeList: string[] = ["extension", "web", "game"];
+    constructor(props: IProps) {
+        super(props);
+        this.state = {
+            visibleBadges: this.badgeList
+        };
+        this.handleCheckBoxChange = this.handleCheckBoxChange.bind(this);
     }
 
     renderProjects() {
@@ -74,8 +89,9 @@ class ProjectPageComponent extends React.Component<IProps> {
         }
 
         const { projects } = this.props;
-        return projects.map((project) => {
-            const { name, description, badge } = project;
+        const { visibleBadges } = this.state;
+        return projects.filter((project) => visibleBadges.includes(project.badge)).map((project) => {
+            const { name, badge } = project;
             return (
                 <ProjectNode to={`/project/${name}`} key={name} badge={badge}>
                     <h1>{name}</h1>
@@ -83,6 +99,42 @@ class ProjectPageComponent extends React.Component<IProps> {
                 </ProjectNode>
             );
         });
+    }
+
+    renderCheckBoxs() {
+        return this.badgeList.map((badge) => {
+            return (
+                <CheckBoxHolder key={badge}>
+                    <label>{badge}</label>
+                    <input type="checkbox" value={badge} onChange={this.handleCheckBoxChange} defaultChecked={true}/>
+                </CheckBoxHolder>
+            );
+        });
+    }
+
+    handleCheckBoxChange(e: any) {
+        e.persist();
+        this.setState((state) => {
+            if (e.target.checked) {
+                return { visibleBadges: [...state.visibleBadges, e.target.value] };
+            } else {
+                return { visibleBadges: state.visibleBadges.filter((badge) => badge != e.target.value) };
+            }
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <Headline>MY WORK 💾</Headline>
+                <div style={{ textAlign: "center" }}>
+                    {this.renderCheckBoxs()}
+                </div>
+                <div>
+                    {this.renderProjects()}
+                </div>
+            </div>
+        );
     }
 }
 
