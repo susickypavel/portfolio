@@ -4,6 +4,7 @@ import {connect} from "react-redux";
 import {ReduxState} from "../reducers";
 import {IProject} from "../types";
 import {Link} from "react-router-dom";
+import {CSSTransition, TransitionGroup} from "react-transition-group";
 
 const Headline = styled.h1`
     font: 48px roboto-black;
@@ -93,10 +94,12 @@ class ProjectPageComponent extends React.Component<IProps, IState> {
         return projects.filter((project) => visibleBadges.includes(project.badge)).map((project) => {
             const { name, badge } = project;
             return (
-                <ProjectNode to={`/project/${name}`} key={name} badge={badge}>
-                    <h1>{name}</h1>
-                    <p>{badge}</p>
-                </ProjectNode>
+                <CSSTransition key={name} classNames="projectListAnimations" timeout={{ enter: 200, exit: 350 }}>
+                    <ProjectNode to={`/project/${name}`} badge={badge}>
+                        <h1>{name}</h1>
+                        <p>{badge}</p>
+                    </ProjectNode>
+                </CSSTransition>
             );
         });
     }
@@ -130,9 +133,9 @@ class ProjectPageComponent extends React.Component<IProps, IState> {
                 <div style={{ textAlign: "center" }}>
                     {this.renderCheckBoxs()}
                 </div>
-                <div>
+                <TransitionGroup>
                     {this.renderProjects()}
-                </div>
+                </TransitionGroup>
             </div>
         );
     }

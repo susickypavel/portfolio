@@ -38,7 +38,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(["dist"]),
         new HtmlWebpackPlugin({
-            title: "Development build",
+            title: "Pavel Sušický - Developer Portfolio",
             template: "./src/index.ejs",
             minify: {
                 removeComments: true,

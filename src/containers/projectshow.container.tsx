@@ -6,6 +6,7 @@ import {AnyAction} from "redux";
 import {ReduxState} from "../reducers";
 import {IProject} from "../types";
 import styled from "styled-components";
+import {SocialMedia} from "../components/socialmedia.component";
 
 const PostHolder = styled.div`
     background-color: #F1F4F2;
@@ -39,6 +40,7 @@ const ProjectLink = styled.p`
 const Description = styled.p`
     font: 36px roboto-regular;
     text-align: justify;
+    line-height: 46px;
 `;
 
 interface IProps {
@@ -64,16 +66,13 @@ class ProjectShowPageContainer extends React.Component<IProps> {
                 <HeadLine>{name} - {date.getMonth() + 1}/{date.getFullYear()} - {badge}</HeadLine>
                 {link ? <ProjectLink>Link to this project: <a href={link}>link</a>.</ProjectLink> : null}
                 <Description>{description}</Description>
+                <SocialMedia showHeader={true}/>
             </PostHolder>
         );
     }
 
     render() {
-        return (
-            <div>
-                {this.renderProject()}
-            </div>
-        );
+        return this.renderProject();
     }
 }
 
@@ -81,6 +80,6 @@ const mapStateToProps = (state: ReduxState) => {
     return {
         activeProject: state.project.activeProject
     };
-}
+};
 
 export const ProjectShowPage = connect(mapStateToProps, { getProjectWithName })(ProjectShowPageContainer);

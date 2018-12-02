@@ -17,7 +17,7 @@ export const ProjectReducer = (state: IState | null = null, action: AnyAction) =
         default:
             const projects: IProject[] = [
                 {
-                    name: "LD40",
+                    name: "Ludum Dare 40",
                     link: "https://thesoreon.itch.io/ludum-dare-40stickyplague",
                     description: (
                         <span>
@@ -31,7 +31,7 @@ export const ProjectReducer = (state: IState | null = null, action: AnyAction) =
                     thumbnail: require("../assets/images/thumbnails/ld40_thumbnail.svg")
                 },
                 {
-                    name: "LD39",
+                    name: "Ludum Dare 39",
                     link: "https://thesoreon.itch.io/ludum-dare-39roop",
                     description: (
                         <span>
@@ -57,7 +57,6 @@ export const ProjectReducer = (state: IState | null = null, action: AnyAction) =
                     ),
                     badge: "extension",
                     date: new Date("2018-11"),
-                    // TODO: Create thumbnail for website-blocker extension
                     thumbnail: require("../assets/images/thumbnails/blocker_thumbnail.svg")
                 },
                 {

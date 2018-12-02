@@ -5,6 +5,7 @@ import { HomePage } from "./homepage.component";
 import Navigation from "./navigation.component";
 import { LoadingScreen } from "./loading.component";
 import { CanvasBackground } from "./canvas.component";
+import { AboutPage } from "./about.component";
 import { ProjectPage } from "../containers/projectpage.container";
 import { ProjectShowPage } from "../containers/projectshow.container";
 
@@ -12,11 +13,11 @@ class Index extends React.Component {
     render() {
         return (
             <React.Fragment>
-                {/*<CanvasBackground />*/}
+                <CanvasBackground />
                 {/* <Navigation /> */}
                 <Switch>
-                    {/* <Route path="/about" component={() => <div>about</div>} />
-                    <Route path="/contact" component={() => <div>contact</div>} /> */}
+                    {/*<Route path="/contact" component={() => <div>contact</div>} />*/}
+                    <Route path="/about" component={AboutPage} />
                     <Route path="/project/:name" component={ProjectShowPage}/>
                     <Route path="/projects" component={ProjectPage} />
                     <Route path="/home" component={HomePage} />

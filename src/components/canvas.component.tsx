@@ -5,10 +5,10 @@ import { Stage, Layer, Image as KonvaImage } from "react-konva";
 interface CustomStyleProps {
     cursor: string;
 }
-
+// TODO: Make button that enables dragging (setting z-index the biggest) and disables dragging.
 const CanvasHolder = styled.div<CustomStyleProps>`
     position: fixed;
-    z-index: 1;
+    z-index: -10;
     ${(props) => `
         cursor: ${props.cursor};
     `}
