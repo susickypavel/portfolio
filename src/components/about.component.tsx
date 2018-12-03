@@ -52,7 +52,12 @@ const ProfilePhoto = styled.div`
     border-radius: 100%;
 `;
 
-export class AboutPage extends React.Component {
+const SocialMediaHeader = styled.h3`
+    font: 36px roboto-thin;
+    text-shadow: 2px 2px 1px gray;
+`;
+
+export default class AboutPage extends React.Component {
     render() {
         return (
             <AboutPageHolder>
@@ -74,7 +79,8 @@ export class AboutPage extends React.Component {
                     <p>Webpack</p>
                     <p>SASS & Styled components</p>
                 </Article>
-                <SocialMedia showHeader={true}/>
+                <SocialMediaHeader>Check out my socials!</SocialMediaHeader>
+                <SocialMedia/>
             </AboutPageHolder>
         );
     }

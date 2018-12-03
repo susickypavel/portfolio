@@ -82,4 +82,4 @@ const mapStateToProps = (state: ReduxState) => {
     };
 };
 
-export const ProjectShowPage = connect(mapStateToProps, { getProjectWithName })(ProjectShowPageContainer);
+export default connect(mapStateToProps, { getProjectWithName })(ProjectShowPageContainer);

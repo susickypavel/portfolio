@@ -40,7 +40,7 @@ const HighLightedLetter = styled(Link)`
     transition: color .15s linear;
 `;
 
-export class HomePage extends React.PureComponent {
+export default class HomePage extends React.PureComponent {
     render() {
         return(
             <HomePageHolder>

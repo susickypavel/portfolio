@@ -1,18 +1,18 @@
 import * as React from "react";
 import { Switch, Route } from "react-router";
-
-import { HomePage } from "./homepage.component";
-import Navigation from "./navigation.component";
 import { LoadingScreen } from "./loading.component";
 import { CanvasBackground } from "./canvas.component";
-import { AboutPage } from "./about.component";
-import { ProjectPage } from "../containers/projectpage.container";
-import { ProjectShowPage } from "../containers/projectshow.container";
+import {Spinner} from "./spinner";
+
+const HomePage = React.lazy(() => import("./homepage.component"));
+const AboutPage = React.lazy(() => import("./about.component"));
+const ProjectPage = React.lazy(() => import("../containers/projectpage.container"));
+const ProjectShowPage = React.lazy(() => import("../containers/projectshow.container"));
 
 class Index extends React.Component {
     render() {
         return (
-            <React.Fragment>
+            <React.Suspense fallback={<Spinner />}>
                 <CanvasBackground />
                 {/* <Navigation /> */}
                 <Switch>
@@ -23,7 +23,7 @@ class Index extends React.Component {
                     <Route path="/home" component={HomePage} />
                     <Route path="/" component={LoadingScreen} />
                 </Switch>
-            </React.Fragment>
+            </React.Suspense>
         );
     }
 }

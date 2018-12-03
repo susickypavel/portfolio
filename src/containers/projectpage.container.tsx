@@ -145,6 +145,6 @@ const mapStateToProps = (state: ReduxState) => {
     return {
         projects: state.project.projects
     };
-}
+};
 
-export const ProjectPage = connect(mapStateToProps)(ProjectPageComponent);
+export default connect(mapStateToProps)(ProjectPageComponent);
