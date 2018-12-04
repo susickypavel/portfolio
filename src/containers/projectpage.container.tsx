@@ -6,9 +6,22 @@ import {IProject} from "../types";
 import {Link} from "react-router-dom";
 import {CSSTransition, TransitionGroup} from "react-transition-group";
 
+const ProjectPageHolder = styled.div`
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    animation: showPage 1s ease-in-out 0s 1;
+`;
+
 const Headline = styled.h1`
     font: 48px roboto-black;
+    color: white;
     text-align: center;
+    width: 90%;
+    margin: 16px auto;
+    padding: 16px;
+    text-shadow: 1px 1px 8px black;
+    background-color: #c70039;
 `;
 
 const ProjectNode = styled(Link)<{ badge: string; }>`
@@ -19,7 +32,6 @@ const ProjectNode = styled(Link)<{ badge: string; }>`
     margin: 16px auto;
     padding: 16px;
     width: 90%;
-    max-width: 800px;
     opacity: 0.8;
     & h1, p {
         margin: 0;
@@ -128,7 +140,7 @@ class ProjectPageComponent extends React.Component<IProps, IState> {
 
     render() {
         return (
-            <div>
+            <ProjectPageHolder>
                 <Headline>MY WORK 💾</Headline>
                 <div style={{ textAlign: "center" }}>
                     {this.renderCheckBoxs()}
@@ -136,7 +148,7 @@ class ProjectPageComponent extends React.Component<IProps, IState> {
                 <TransitionGroup>
                     {this.renderProjects()}
                 </TransitionGroup>
-            </div>
+            </ProjectPageHolder>
         );
     }
 }

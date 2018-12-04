@@ -10,6 +10,7 @@ const AboutPageHolder = styled.div`
     margin: 0 auto;
     padding: 8px 0;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    animation: showPage 1s ease-in-out 0s 1;
 `;
 
 const Article = styled.div`
@@ -21,7 +22,7 @@ const Article = styled.div`
     & h2 {
         margin: 0;
         font: 48px roboto-black;
-        padding: 8px;
+        padding: 16px;
         background-color: #c70039;
         color: white;
         text-shadow: 1px 1px 8px black;
@@ -68,7 +69,7 @@ export default class AboutPage extends React.Component {
                         Hi, as you already found out i'm <strong>Pavel Sušický</strong>. Young student from <strong>Czech republic</strong> interested in
                         modern technologies, mainly in development and more specific in <strong>WEB development</strong>. I'm walking around
                         programming since fourteen, but i did similar things when i was much younger. I'm very purposeful and
-                        wants to make everything perfect.
+                        want to make everything perfect.
                     </p>
                 </Article>
                 <Article color="#9569BC80">

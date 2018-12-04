@@ -9,6 +9,7 @@ import styled from "styled-components";
 import {SocialMedia} from "../components/socialmedia.component";
 
 const PostHolder = styled.div`
+    animation: showPage 1s ease-in-out 0s 1;
     background-color: #F1F4F2;
     box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     width: 100%;

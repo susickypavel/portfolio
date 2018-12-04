@@ -8,6 +8,7 @@ const HomePage = React.lazy(() => import("./homepage.component"));
 const AboutPage = React.lazy(() => import("./about.component"));
 const ProjectPage = React.lazy(() => import("../containers/projectpage.container"));
 const ProjectShowPage = React.lazy(() => import("../containers/projectshow.container"));
+const ContactPage = React.lazy(() => import("./contact.component"));
 
 class Index extends React.Component {
     render() {
@@ -16,7 +17,7 @@ class Index extends React.Component {
                 <CanvasBackground />
                 {/* <Navigation /> */}
                 <Switch>
-                    {/*<Route path="/contact" component={() => <div>contact</div>} />*/}
+                    <Route path="/contact" component={ContactPage} />
                     <Route path="/about" component={AboutPage} />
                     <Route path="/project/:name" component={ProjectShowPage}/>
                     <Route path="/projects" component={ProjectPage} />
