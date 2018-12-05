@@ -1,8 +1,3 @@
-$navigation-height: 85px;
-
-@import "homepage.scss";
-@import "navigation.scss";
-
 @import "imports.scss";
 @import "animations.scss";
 
@@ -10,7 +5,7 @@ $navigation-height: 85px;
     box-sizing: border-box;
 }
 
-html, body, #REACT_MOUNT, .homePage {
+html, body, #REACT_MOUNT {
     height: 100%;
     margin: 0;
     overflow-y: auto;

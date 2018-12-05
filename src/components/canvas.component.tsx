@@ -5,13 +5,10 @@ import { Stage, Layer, Image as KonvaImage } from "react-konva";
 interface CustomStyleProps {
     cursor: string;
 }
-// TODO: Make button that enables dragging (setting z-index the biggest) and disables dragging.
+
 const CanvasHolder = styled.div<CustomStyleProps>`
     position: fixed;
     z-index: -10;
-    ${(props) => `
-        cursor: ${props.cursor};
-    `}
 `;
 
 interface IState {
@@ -25,7 +22,6 @@ interface IState {
         x: number;
         y: number;
         sizes: { width: number, height: number };
-        dragging: boolean;
     }>;
 }
 
@@ -43,14 +39,12 @@ export class CanvasBackground extends React.Component<{}, IState> {
                     sizes: { height: 50, width: 50 },
                     x: Math.random() * (window.innerWidth - 100),
                     y: Math.random() * (window.innerHeight - 100),
-                    dragging: false,
                     src: require("../assets/images/logo_v2.svg")
                 },
                 {
                     sizes: { height: 50, width: 50 },
                     x: Math.random() * (window.innerWidth - 100),
                     y: Math.random() * (window.innerHeight - 100),
-                    dragging: false,
                     src: require("../assets/images/czechflag.svg")
                 }
             ],
@@ -74,7 +68,7 @@ export class CanvasBackground extends React.Component<{}, IState> {
     animate() {
         this.setState((state) => {
             for (const iterator of state.images) {
-                if (iterator.y - iterator.sizes.height <= window.innerHeight && !iterator.dragging) {
+                if (iterator.y - iterator.sizes.height <= window.innerHeight) {
                     iterator.y += 1;
                 } else {
                     iterator.y = -iterator.sizes.height;
@@ -97,31 +91,7 @@ export class CanvasBackground extends React.Component<{}, IState> {
                     x={x}
                     y={y}
                     key={src}
-                    draggable={true}
                     image={tempImage}
-                    onMouseEnter={() => this.setState({ cursor: "grab" })}
-                    onMouseLeave={() => this.setState({ cursor: "auto" })}
-                    onMouseDown={() => this.setState({ cursor: "grabbing" })}
-                    onMouseUp={() => this.setState({ cursor: "grab" })}
-                    onDragStart={() => this.setState((state) => {
-                        state.images[state.images.indexOf(image)].dragging = true;
-                        return {
-                            images: state.images
-                        };
-                    })}
-                    onDragEnd={(e: any) => this.setState((state) => {
-                        state.images[state.images.indexOf(image)] = {
-                            x: e.target.attrs.x,
-                            y: e.target.attrs.y,
-                            dragging: false,
-                            src,
-                            sizes
-                        };
-
-                        return {
-                            images: state.images
-                        };
-                    })}
                 />
             );
         });

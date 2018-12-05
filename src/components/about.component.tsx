@@ -1,6 +1,7 @@
 import * as React from "react";
 import styled from "styled-components";
 import {SocialMedia} from "./socialmedia.component";
+import {AsyncImage} from "./asyncImage";
 
 const AboutPageHolder = styled.div`
     text-align: center;
@@ -26,7 +27,6 @@ const Article = styled.div`
         background-color: #c70039;
         color: white;
         text-shadow: 1px 1px 8px black;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
     }
     & p {
         margin: 0;
@@ -40,17 +40,12 @@ const Article = styled.div`
     }
 `;
 
-const ProfilePhoto = styled.div`
+const ProfilePhoto = styled(AsyncImage)`
     margin: 0 auto 8px auto;
-    width: 64vw;
-    max-width: 500px;
-    height: 64vw;
-    max-height: 500px;
-    border: 4px solid #c70039;
-    background-image: url(${require("../assets/images/profile.png")});
-    background-position: center center;
-    background-size: cover;
+    height: calc(20vw + 150px);
+    width: calc(20vw + 150px);
     border-radius: 100%;
+    border: 3.5px solid #c70039;
 `;
 
 const SocialMediaHeader = styled.h3`
@@ -62,7 +57,11 @@ export default class AboutPage extends React.Component {
     render() {
         return (
             <AboutPageHolder>
-                <ProfilePhoto />
+                <ProfilePhoto
+                    compressImage={require("../assets/images/profile_compress.png")}
+                    image={require("../assets/images/profile_full.png")}
+                    alt={"profile_photo"}
+                />
                 <Article color="#5AD9F180">
                     <h2>About me 👦</h2>
                     <p>

@@ -76,7 +76,7 @@ const pickColor = (badge: string) => {
         default:
             return "gray";
     }
-}
+};
 
 interface IProps {
     projects: IProject[];

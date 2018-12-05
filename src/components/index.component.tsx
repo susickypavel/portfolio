@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Switch, Route } from "react-router";
 import { LoadingScreen } from "./loading.component";
-import { CanvasBackground } from "./canvas.component";
 import {Spinner} from "./spinner";
 
 const HomePage = React.lazy(() => import("./homepage.component"));
@@ -14,8 +13,6 @@ class Index extends React.Component {
     render() {
         return (
             <React.Suspense fallback={<Spinner />}>
-                <CanvasBackground />
-                {/* <Navigation /> */}
                 <Switch>
                     <Route path="/contact" component={ContactPage} />
                     <Route path="/about" component={AboutPage} />
