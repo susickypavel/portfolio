@@ -49,7 +49,7 @@ export default class HomePage extends React.PureComponent {
                         <HeadLine>
                             <HighLightedLetter to="/projects">P</HighLightedLetter>
                             <HighLightedLetter to="/about">A</HighLightedLetter>
-                            vel <HighLightedLetter to="/contact">S</HighLightedLetter>ušický
+                            vel Suši<HighLightedLetter to="/contact">C</HighLightedLetter>ký
                         </HeadLine>
                     </Header>
                 </Boundary>
